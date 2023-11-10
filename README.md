@@ -1,70 +1,96 @@
 
-# Problem
-
+# Problem with docker
+--------------------------------------------------------------------------------------------------------------
 ##
 
-    SQLSTATE[HY000] [2002] Connection refused (SQL: select * from information_schema.tables where table_schema = laravel8 and table_name = migrations and table_type = 'BASE TABLE')
+SQLSTATE[HY000] [2002] Connection refused (SQL: select * from information_schema.tables where table_schema = laravel8 and table_name = migrations and table_type = 'BASE TABLE')
 
 docker network inspect bridge
 
 Copy "Gateway" ip address and replace with DB_HOST value in .env file. It will work
 
-
+--------------------------------------------------------------------------------------------------------------
 #Migrations
 
 ##Generating Migrations
 
 php artisan make:migration create_flights_table
 
-
-
 php artisan migrate:rollback
-
 
 php artisan migrate --force
 
 php artisan migrate:status
 
 
+change a migration files
+--------------------------------------------------------------------------------------------------------------
+
+php artisan make:migration change_column_to_name_at_to_users_table --table=users
+
+
+--------------------------------------------------------------------------------------------------------------
+# migrations Rollback
+php artisan migrate:rollback --step=5
+
+
+Drop All Tables & Migrate
+
+php artisan migrate:fresh
+ 
+php artisan migrate:fresh --seed
+
+php artisan db:seed --class=UserSeeder
+
+
+Seeder drop existing
+--------------------------------------------------------------------------------------------------------------
+php artisan make:seeder UserSeeder
+
+php artisan migrate:fresh --seed
+ 
+php artisan migrate:fresh --seed --seeder=UserSeeder
+
+
+The migrate:reset command will roll back all of your application's migrations:
+--------------------------------------------------------------------------------------------------------------
+php artisan migrate:reset
+
+
+--------------------------------------------------------------------------------------------------------------
+
+
 #Squashing Migrations
 php artisan schema:dump
  
+--------------------------------------------------------------------------------------------------------------
 # Dump the current database schema and prune all existing migrations...
 php artisan schema:dump --prune
 
 When you execute this command, Laravel will write a "schema" file to your application's database/schema directory. 
 
-
-Laravel migratons:
+#Laravel migratons:
 
 php artisan make:model Todo -all
 
-
 -c, --controller Create a new controller for the model
-
 -f, --factory Create a new factory for the model
-
 --force Create the class even if the model already exists
-
 -m, --migration Create a new migration file for the model
-
 -s, --seed Create a new seeder file for the model
-
 -p, --pivot Indicates if the generated model should be a custom intermediate table model
-
 -r, --resource Indicates if the generated controller should be a resource controller
 
-
 php artisan make:model --migration --controller test
-
-for resources:
+--------------------------------------------------------------------------------------------------------------
+#for resources:
 
 php artisan make:model --migration --controller test --resource  
 
-
+--------------------------------------------------------------------------------------------------------------
 # How to Update Table structure using migration – Laravel
 
-3. Method 1 – Refresh Migration
+##3. Method 1 – Refresh Migration
 it recreates the whole database and deletes its data.
 php artisan migrate:refresh
 
@@ -104,7 +130,7 @@ public function deletePost($id)
     // Additional logic...
 }
 
-###Restore
+##Restore
 
 public function restorePost($id)
 {
@@ -127,31 +153,7 @@ public function deletePostForever($id)
     // Additional logic...
 }
 
-
-# migrations Rollback
-php artisan migrate:rollback --step=5
-
-
-Drop All Tables & Migrate
-
-php artisan migrate:fresh
- 
-php artisan migrate:fresh --seed
-
-php artisan db:seed --class=UserSeeder
-
-
-drop existing
-php artisan migrate:fresh --seed
- 
-php artisan migrate:fresh --seed --seeder=UserSeeder
-
-
-The migrate:reset command will roll back all of your application's migrations:
-
-php artisan migrate:reset
-
-
+--------------------------------------------------------------------------------------------------------------
 
 # Faker
 

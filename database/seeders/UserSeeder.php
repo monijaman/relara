@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
 
         $this->faker = Faker::create();
 
-        User::factory(5)->create()->each(function(User $user) {
+        User::factory(100)->create()->each(function(User $user) {
             User::factory()
                 ->create([
                     'name' => $this->faker->name, // Str::random(10),

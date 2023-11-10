@@ -21,6 +21,10 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 //            $table->foreign('category_id')->references('id')->on('categories');
+
+            //$table->foreign('categories')->references('id')->on('sub_categories')->onUpdate('cascade')->onDelete('cascade');
+
+
         });
     }
 
