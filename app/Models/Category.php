@@ -5,9 +5,9 @@ use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\HasMedia;
+//use Spatie\MediaLibrary\HasMedia;
 //use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+//use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 
 class Category extends Model
@@ -47,8 +47,8 @@ class Category extends Model
 //
 //    }
 
-//    public function getPhotoAttribute()
-//    {
+    public function getPhotoAttribute()
+    {
 //        $file = $this->getMedia('photo')->last();
 //        if ($file) {
 //            $file->url = $file->getUrl();
@@ -57,7 +57,7 @@ class Category extends Model
 //        }
 //
 //        return $file;
-//    }
+    }
 
     public function subcategories()
     {

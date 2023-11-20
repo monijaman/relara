@@ -23,14 +23,15 @@ php artisan migrate --force
 php artisan migrate:status
 
 
-change a migration files
+# change a migration files
 --------------------------------------------------------------------------------------------------------------
 
 php artisan make:migration change_column_to_name_at_to_users_table --table=users
 
 
---------------------------------------------------------------------------------------------------------------
 # migrations Rollback
+--------------------------------------------------------------------------------------------------------------
+
 php artisan migrate:rollback --step=5
 
 
@@ -38,31 +39,42 @@ Drop All Tables & Migrate
 
 php artisan migrate:fresh
  
+
+#The migrate:reset command will roll back all of your application's migrations:
+--------------------------------------------------------------------------------------------------------------
+php artisan migrate:reset
+
+
+#Squashing Migrations
+--------------------------------------------------------------------------------------------------------------
+php artisan schema:dump
+ 
+
+Seeder
+--------------------------------------------------------------------------------------------------------------
+php artisan make:seeder UserSeeder
+
 php artisan migrate:fresh --seed
 
 php artisan db:seed --class=UserSeeder
 
 
-Seeder drop existing
+Create a Factory
 --------------------------------------------------------------------------------------------------------------
-php artisan make:seeder UserSeeder
+php artisan make:factory PostFactory
 
+
+
+
+#Seeder drop existing
+--------------------------------------------------------------------------------------------------------------
 php artisan migrate:fresh --seed
  
 php artisan migrate:fresh --seed --seeder=UserSeeder
 
 
-The migrate:reset command will roll back all of your application's migrations:
---------------------------------------------------------------------------------------------------------------
-php artisan migrate:reset
 
 
---------------------------------------------------------------------------------------------------------------
-
-
-#Squashing Migrations
-php artisan schema:dump
- 
 --------------------------------------------------------------------------------------------------------------
 # Dump the current database schema and prune all existing migrations...
 php artisan schema:dump --prune
@@ -81,14 +93,18 @@ php artisan make:model Todo -all
 -p, --pivot Indicates if the generated model should be a custom intermediate table model
 -r, --resource Indicates if the generated controller should be a resource controller
 
-php artisan make:model --migration --controller test
+Create a migration controller and  model together
 --------------------------------------------------------------------------------------------------------------
-#for resources:
+php artisan make:model --migration --controller test
 
+
+#for resources:
+--------------------------------------------------------------------------------------------------------------
 php artisan make:model --migration --controller test --resource  
 
---------------------------------------------------------------------------------------------------------------
+
 # How to Update Table structure using migration – Laravel
+--------------------------------------------------------------------------------------------------------------
 
 ##3. Method 1 – Refresh Migration
 it recreates the whole database and deletes its data.
@@ -158,3 +174,57 @@ public function deletePostForever($id)
 # Faker
 
 https://fakerphp.github.io/formatters/
+https://blog.treblle.com/how-to-create-rest-api-using-laravel/
+
+
+
+Tailwind form:
+
+https://herotofu.com/solutions/forms-library/tailwind/request-access-form
+https://tailwindui.com/components/application-ui/forms/form-layouts
+
+https://templates-demo.formbold.com/html-consent-form
+
+
+
+
+# Where Get contidtion:
+
+## Method 1: With Operator
+
+public function index() {
+$projects = Project::where("status", "=", 1)->get();
+
+    dd($projects);
+}
+
+
+##Method 2: Without Operator
+public function index() {
+$projects = Project::where("status", 1)->get();
+
+    dd($projects);
+}
+
+
+public function index() {
+$projects = Project::where(['status' => '1', 'not_completed' => '0', 'user_id' => '24'])->get();
+
+    dd($projects);
+}
+
+
+public function index() {
+$projects = Project::where([['status', '=', '1'], ['not_completed', '!=', '1'], ['user_id', '>=', '24']])->get();
+
+    dd($projects);
+}
+
+public function index() {
+$projects = Project::where('status', '=', '1')
+->('not_completed', '!=', '1')
+->('user_id', '>=', '24')
+->get();
+
+    dd($projects);
+}
