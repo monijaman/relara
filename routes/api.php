@@ -3,7 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\SubCategoryController;
-
+use App\Http\Controllers\api\CategoryController;
+use App\Http\Controllers\api\ObjectController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -27,8 +28,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request){
 //Route::get('/subcategories/{id}', function (string $id) {
 //    return 'User '.$id;
 //});
+Route::get('/categories', [CategoryController::class, 'getCategory'])->name('getCategory');
 
 Route::get('/subcategories/{id?}', [SubCategoryController::class, 'index'])->name('getSubCategory');
+
+Route::post('/upload/{id?}', [ObjectController::class, 'fileupload'])->name('uploadPhoto');
 
 
 //Route::controller(SubCategoryController::class)->group(function () {
