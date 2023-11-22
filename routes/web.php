@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+dd(app()->make('test_time'));
+dd(app()->make('test_time'));
