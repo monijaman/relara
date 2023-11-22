@@ -37,4 +37,4 @@ composer require phpoffice/phpspreadsheet
 
 ## for ubuntu pdf problem
 https://gist.github.com/srmds/2507aa3bcdb464085413c650fe42e31d
-$ sudo apt-get update && sudo apt-get -y install wkhtmltopdf
+$ sudo apt-get update && sudo apt-get -y install wkhtmltopdf 
